@@ -65,6 +65,9 @@ public slots:
     /// \param pos 下子位置。
     void slotMove(Position pos);
 
+    /// \brief 重置。
+    void reset();
+
 signals:
     /// \brief 棋盘改变信号。
     ///
@@ -101,7 +104,7 @@ private:
 
     PlayerColor getWinner();
 
-    void reset();
+    friend class Ai;
 };
 
 inline GamePlay::CheckerBoard GamePlay::getCheckerBoard()

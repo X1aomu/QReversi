@@ -5,6 +5,7 @@
 #include "core/battle.h"
 #include "core/players/virtualplayer.h"
 #include "ui/checkerboard/checkerboardwidget.h"
+#include "ui/newgamedialog.h"
 
 #include <QMainWindow>
 
@@ -47,6 +48,8 @@ private:
     QAction *m_startGame;
     QAction *m_stopGame;
     QAction *m_exitGame;
+
+    NewGameDialog* m_newGameDialog;
 
     void initMenuBar();
     void initSignalsAndSlots();

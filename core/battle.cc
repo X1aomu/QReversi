@@ -52,6 +52,7 @@ void Battle::startNewBattle(Battle::PlayerType blackPlayerType, Battle::PlayerTy
         break;
     case Ai:
         m_playerBlack = new class Ai(blackPlayerName, this);
+        dynamic_cast<class Ai*>(m_playerBlack)->setGame(&m_gamePlay);
         break;
     }
     switch (whitePlayerType) {
@@ -60,6 +61,7 @@ void Battle::startNewBattle(Battle::PlayerType blackPlayerType, Battle::PlayerTy
         break;
     case Ai:
         m_playerWhile = new class Ai(whitePlayerName, this);
+        dynamic_cast<class Ai*>(m_playerWhile)->setGame(&m_gamePlay);
         break;
     }
 
@@ -73,6 +75,7 @@ void Battle::startNewBattle(Battle::PlayerType blackPlayerType, Battle::PlayerTy
 
 void Battle::endBattle()
 {
+    m_gamePlay.reset();
     cleanup();
     emit sigChanged();
 }

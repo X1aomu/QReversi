@@ -28,7 +28,7 @@ void GamePlay::slotStartNewGame()
 
 void GamePlay::slotMove(GamePlay::Position pos)
 {
-    qDebug()<<"Running:"<<m_running;
+//    qDebug()<<"Running:"<<m_running;
     if (!m_running) return;
     if (m_currentPlayer == Unknown) return;
     if (tryMove(pos, m_currentPlayer, true) > 0)
@@ -39,6 +39,11 @@ void GamePlay::slotMove(GamePlay::Position pos)
         if (playerCanMove(nextPlayer))
         {
             m_currentPlayer = nextPlayer;
+            emit sigPlayerChanged(m_currentPlayer);
+            return;
+        }
+        if (!playerCanMove(nextPlayer) && playerCanMove(m_currentPlayer))
+        {
             emit sigPlayerChanged(m_currentPlayer);
             return;
         }
@@ -130,12 +135,12 @@ bool GamePlay::playerCanMove(GamePlay::PlayerColor playerColor)
         {
             if (tryMove({row, col}, playerColor, false) > 0)
             {
-                qDebug()<<"playercanmove: true";
+                //qDebug()<<"playercanmove: true";
                 return true;
             }
         }
     }
-    qDebug()<<"playercanmove: false";
+    //qDebug()<<"playercanmove: false";
     return false;
 }
 
@@ -179,4 +184,5 @@ void GamePlay::reset()
     m_board[3][4] = m_board[4][3] = Black;
     m_running = false;
     m_currentPlayer = Unknown;
+    emit sigCheckerBoardChanged(m_board);
 }

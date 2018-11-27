@@ -34,7 +34,8 @@ SOURCES += \
     ui/mainwindow.cc \
     ui/checkerboard/boardlayout.cc \
     ui/checkerboard/checkerboardwidget.cc \
-    ui/checkerboard/boardgrid.cc
+    ui/checkerboard/boardgrid.cc \
+    ui/newgamedialog.cc
 
 HEADERS += \
     ui/mainwindow.h \
@@ -45,9 +46,13 @@ HEADERS += \
     core/players/virtualplayer.h \
     core/battle.h \
     core/gameplay.h \
-    ui/checkerboard/boardgrid.h
+    ui/checkerboard/boardgrid.h \
+    ui/newgamedialog.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    ui/newgamedialog.ui

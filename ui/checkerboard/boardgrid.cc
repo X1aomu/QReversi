@@ -30,11 +30,9 @@ void BoardGrid::setStoneColor(GamePlay::PlayerColor role)
     switch (role) {
     case GamePlay::Black:
         setStyleSheet("background-color:black;");
-        //setText("B");
         break;
     case GamePlay::White:
         setStyleSheet("background-color:white;");
-        //setText("W");
         break;
     case GamePlay::Unknown:
         setStyleSheet("QPushButton {background-color: #a7690a;} :hover { background-color: grey; }");
@@ -44,6 +42,6 @@ void BoardGrid::setStoneColor(GamePlay::PlayerColor role)
 
 void BoardGrid::slotOnClicked()
 {
-    qDebug()<<"clicked:" + QString::number(m_position.row) + "," + m_position.col;
+    //qDebug()<<"clicked:" + QString::number(m_position.row) + "," + m_position.col;
     emit sigMoved(m_position);
 }

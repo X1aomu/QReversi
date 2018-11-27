@@ -31,9 +31,9 @@ CheckerBoardWidget::CheckerBoardWidget(QWidget *parent)
 
 void CheckerBoardWidget::setCheckerBoard(const GamePlay::CheckerBoard &board)
 {
-    for (int row = 0; row < GamePlay::kBoardRows; ++row)
+    for (size_t row = 0; row < GamePlay::kBoardRows; ++row)
     {
-        for (int col = 0; col < GamePlay::kBoardColumns; ++col)
+        for (size_t col = 0; col < GamePlay::kBoardColumns; ++col)
         {
             m_grids[row][col]->setStoneColor(board[row][col]);
         }

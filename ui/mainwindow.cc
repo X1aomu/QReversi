@@ -7,6 +7,7 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QStatusBar>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -15,16 +16,18 @@ MainWindow::MainWindow(QWidget *parent)
       m_gameMenu(menuBar()->addMenu("Game")),
       m_startGame(new QAction("Start game", this)),
       m_stopGame(new QAction("Stop game", this)),
-      m_exitGame(new QAction("Exit", this))
+      m_exitGame(new QAction("Exit", this)),
+      m_newGameDialog(new NewGameDialog(this))
 {
     // 中心控件
     setCentralWidget(m_checkerBoardWidget);
 
     initMenuBar();
     initSignalsAndSlots();
-    //updateStatusBar();
 
-    m_battle->startNewBattle(Battle::Human, Battle::Human, "H1", "H2");
+    m_newGameDialog->setBattle(m_battle);
+
+    m_battle->endBattle(); // 首次重置
 }
 
 MainWindow::~MainWindow()
@@ -59,7 +62,7 @@ void MainWindow::initSignalsAndSlots()
 
 void MainWindow::startNewGame()
 {
-
+    m_newGameDialog->show();
 }
 
 void MainWindow::stopGame()
@@ -69,11 +72,26 @@ void MainWindow::stopGame()
 
 void MainWindow::showWinnerInfo(GamePlay::PlayerColor winner)
 {
-
+    QMessageBox* mb = new QMessageBox(this);
+    mb->setAttribute(Qt::WA_DeleteOnClose, true);
+    mb->setWindowTitle(" ");
+    if (winner == GamePlay::Unknown)
+        mb->setText("平局！");
+    else
+        mb->setText(m_battle->getPlayer(winner)->getName() + " 胜利！");
+    mb->show();
 }
 
 void MainWindow::updateStatusBar()
 {
-    QString currentPlayerName = m_battle->getPlayer(m_battle->currentPlayerColor())->getName();
-    statusBar()->showMessage("请 " + currentPlayerName + " 下子");
+    if (m_battle->isBattleRunning())
+    {
+        QString currentPlayerName = m_battle->getPlayer(m_battle->currentPlayerColor())->getName();
+        statusBar()->showMessage("请 " + currentPlayerName + " 下子");
+    }
+    else
+    {
+
+        statusBar()->showMessage("开始一场新游戏");
+    }
 }
