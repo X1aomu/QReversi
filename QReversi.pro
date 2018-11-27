@@ -32,20 +32,20 @@ SOURCES += \
     core/battle.cc \
     core/gameplay.cc \
     ui/mainwindow.cc \
-    ui/checkerboard/boardgird.cc \
     ui/checkerboard/boardlayout.cc \
-    ui/checkerboard/checkerboardwidget.cc
+    ui/checkerboard/checkerboardwidget.cc \
+    ui/checkerboard/boardgrid.cc
 
 HEADERS += \
     ui/mainwindow.h \
     ui/checkerboard/boardlayout.h \
-    ui/checkerboard/boardgird.h \
     ui/checkerboard/checkerboardwidget.h \
     core/players/ai.h \
     core/players/human.h \
     core/players/virtualplayer.h \
     core/battle.h \
-    core/gameplay.h
+    core/gameplay.h \
+    ui/checkerboard/boardgrid.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

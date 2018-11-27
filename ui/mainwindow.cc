@@ -21,8 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_checkerBoardWidget);
 
     initMenuBar();
-    updateStatusBar();
     initSignalsAndSlots();
+    //updateStatusBar();
+
+    m_battle->startNewBattle(Battle::Human, Battle::Human, "H1", "H2");
 }
 
 MainWindow::~MainWindow()
@@ -62,7 +64,7 @@ void MainWindow::startNewGame()
 
 void MainWindow::stopGame()
 {
-
+    m_battle->endBattle();
 }
 
 void MainWindow::showWinnerInfo(GamePlay::PlayerColor winner)
@@ -72,5 +74,6 @@ void MainWindow::showWinnerInfo(GamePlay::PlayerColor winner)
 
 void MainWindow::updateStatusBar()
 {
-
+    QString currentPlayerName = m_battle->getPlayer(m_battle->currentPlayerColor())->getName();
+    statusBar()->showMessage("请 " + currentPlayerName + " 下子");
 }

@@ -26,13 +26,14 @@ public:
 
     /// \brief 构造函数。
     explicit Battle(QObject *parent = nullptr);
+    ~Battle();
 
     /// \brief 是否正在对战中。
     /// \return 如果正在对战则为 true。
     bool isBattleRunning();
     /// \brief 当前下子方。
     /// \return 当前下子方。
-    PlayerColor currentPlayer();
+    PlayerColor currentPlayerColor();
     /// \brief 获取对战中的玩家。
     /// \param playerColor 玩家颜色，
     ///        需为 #GamePlay::Black 或 #GamePlay::White 。
@@ -82,11 +83,17 @@ signals:
     /// 当棋盘发生变化时发出该信号。当开始一局游戏或发生有效下子时会发出此信号。
     ///
     /// \param currentBoard 改变后的棋盘。
-    void sigCheckerBoardChanged(GamePlay::CheckerBoard &currentBoard);
+    void sigCheckerBoardChanged(GamePlay::CheckerBoard currentBoard);
 
 private:
+    GamePlay m_gamePlay;
     VirtualPlayer *m_playerBlack;
     VirtualPlayer *m_playerWhile;
+
+    void cleanup();
+    void gamePlayCheckerBoardChangedHandler(GamePlay::CheckerBoard currentBoard);
+    void gamePlayPlayerChangedHandler(PlayerColor playerColor);
+    void gamePlayGameOverHandler(PlayerColor winner);
 };
 
 #endif // ROUND_H

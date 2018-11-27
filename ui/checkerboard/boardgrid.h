@@ -9,7 +9,7 @@
 ///
 /// 每个棋盘格子都有它的位置和归属方（黑、白或未知），
 /// 点击一个棋盘格子可以在它所处的位置下子。
-class BoardGird : public QPushButton
+class BoardGrid : public QPushButton
 {
     Q_OBJECT
 
@@ -18,8 +18,8 @@ public:
     /// \param position 该格子的位置。
     /// \param stoneColor 该格子上的棋子颜色。
     /// \param parent 父控件
-    BoardGird(GamePlay::Position position, GamePlay::PlayerColor stoneColor = GamePlay::PlayerColor::Unknown, QWidget *parent = nullptr);
-    ~BoardGird();
+    BoardGrid(GamePlay::Position position, GamePlay::PlayerColor stoneColor = GamePlay::PlayerColor::Unknown, QWidget *parent = nullptr);
+    ~BoardGrid();
 
     /// \brief 更改格子上的棋子颜色。
     /// \param stoneColor 棋子颜色。

@@ -1,18 +1,28 @@
 #include "checkerboardwidget.h"
 
 #include "ui/checkerboard/boardlayout.h"
-#include "ui/checkerboard/boardgird.h"
+#include "ui/checkerboard/boardgrid.h"
 #include "core/gameplay.h"
 
 CheckerBoardWidget::CheckerBoardWidget(QWidget *parent)
     : QWidget(parent)
 {
-    BoardLayout *layout = new BoardLayout(this);
-    for (int row = 0; row < GamePlay::kBoardRows; ++row)
+    for (size_t row = 0; row != GamePlay::kBoardRows; ++row)
     {
-        for (int col = 0; col < GamePlay::kBoardColumns; ++col)
+        for (size_t col = 0; col != GamePlay::kBoardColumns; ++col)
         {
-            layout->addWidget(new BoardGird({row, col}), row, col);
+            BoardGrid* grid = new BoardGrid({row, col});
+            // 连接信号
+            connect(grid, &BoardGrid::sigMoved, this, &CheckerBoardWidget::sigMoved);
+            m_grids[row][col] = grid;
+        }
+    }
+    BoardLayout *layout = new BoardLayout(this);
+    for (size_t row = 0; row != GamePlay::kBoardRows; ++row)
+    {
+        for (size_t col = 0; col != GamePlay::kBoardColumns; ++col)
+        {
+            layout->addWidget(m_grids[row][col], row, col);
         }
     }
 
@@ -21,5 +31,11 @@ CheckerBoardWidget::CheckerBoardWidget(QWidget *parent)
 
 void CheckerBoardWidget::setCheckerBoard(const GamePlay::CheckerBoard &board)
 {
-
+    for (int row = 0; row < GamePlay::kBoardRows; ++row)
+    {
+        for (int col = 0; col < GamePlay::kBoardColumns; ++col)
+        {
+            m_grids[row][col]->setStoneColor(board[row][col]);
+        }
+    }
 }

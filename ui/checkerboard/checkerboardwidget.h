@@ -2,9 +2,12 @@
 #define CHECKERBOARDWIDGET_H
 
 #include "core/gameplay.h"
+#include "ui/checkerboard/boardgrid.h"
 
 #include <QObject>
 #include <QWidget>
+
+#include <array>
 
 /// \brief 棋盘显示控件。
 ///
@@ -28,6 +31,9 @@ signals:
     /// \brief 发出下子信号。
     /// \param position 下子位置。
     void sigMoved(GamePlay::Position position);
+
+private:
+    std::array<std::array<BoardGrid*, GamePlay::kBoardColumns>, GamePlay::kBoardRows> m_grids;
 };
 
 #endif // CHECKERBOARDWIDGET_H
