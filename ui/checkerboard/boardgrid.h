@@ -14,12 +14,15 @@ class BoardGrid : public QPushButton
     Q_OBJECT
 
 public:
+    static const size_t kGridSize = 64;
+    static const size_t kStoneRadius = 24;
+
     /// \brief 构造函数。
     /// \param position 该格子的位置。
     /// \param stoneColor 该格子上的棋子颜色。
     /// \param parent 父控件
     BoardGrid(GamePlay::Position position, GamePlay::PlayerColor stoneColor = GamePlay::PlayerColor::Unknown, QWidget *parent = nullptr);
-    ~BoardGrid();
+    ~BoardGrid() override;
 
     /// \brief 更改格子上的棋子颜色。
     /// \param stoneColor 棋子颜色。
@@ -34,9 +37,14 @@ signals:
     /// \param position 下子位置。
     void sigMoved(GamePlay::Position position);
 
+protected:
+    void paintEvent(QPaintEvent *event) override;
+    bool event(QEvent *event) override;
+
 private:
     GamePlay::Position m_position;
-    GamePlay::PlayerColor m_color;
+    GamePlay::PlayerColor m_playerColor;
+    bool m_hovered = false;
 };
 
 #endif // PIECEGIRD_H
