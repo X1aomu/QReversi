@@ -1,7 +1,5 @@
 #include "gameplay.h"
 
-#include <QtDebug>
-
 GamePlay::GamePlay(QObject *parent)
     : QObject(parent)
 {
@@ -28,7 +26,6 @@ void GamePlay::slotStartNewGame()
 
 void GamePlay::slotMove(GamePlay::Position pos)
 {
-//    qDebug()<<"Running:"<<m_running;
     if (!m_running) return;
     if (m_currentPlayer == Unknown) return;
     if (tryMove(pos, m_currentPlayer, true) > 0)
@@ -135,12 +132,10 @@ bool GamePlay::playerCanMove(GamePlay::PlayerColor playerColor)
         {
             if (tryMove({row, col}, playerColor, false) > 0)
             {
-                //qDebug()<<"playercanmove: true";
                 return true;
             }
         }
     }
-    //qDebug()<<"playercanmove: false";
     return false;
 }
 

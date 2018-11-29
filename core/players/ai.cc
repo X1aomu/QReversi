@@ -8,9 +8,6 @@
 
 #include "core/gameplay.h"
 
-#include <QtDebug>
-
-
 void Ai::slotNextMove(const GamePlay::CheckerBoard &game, GamePlay::PlayerColor playerColor)
 {
     Q_UNUSED(game);

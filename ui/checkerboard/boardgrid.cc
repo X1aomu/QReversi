@@ -1,6 +1,5 @@
 #include "boardgrid.h"
 
-#include <QtDebug>
 #include <QPainter>
 #include <QBrush>
 #include <QEvent>
@@ -35,7 +34,6 @@ void BoardGrid::setStoneColor(GamePlay::PlayerColor role)
 
 void BoardGrid::slotOnClicked()
 {
-    //qDebug()<<"clicked:" + QString::number(m_position.row) + "," + m_position.col;
     emit sigMoved(m_position);
 }
 
