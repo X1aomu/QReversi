@@ -56,3 +56,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 FORMS += \
     ui/newgamedialog.ui
+
+RESOURCES += \
+    resources.qrc
