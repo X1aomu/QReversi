@@ -19,8 +19,8 @@ void NewGameDialog::on_buttonBox_accepted()
 {
     if (m_battle == nullptr)
         return;
-    QString name1 = "玩家 黑";
-    QString name2 = "玩家 白";
+    QString name1 = "黑方";
+    QString name2 = "白方";
     if (!ui->lineEdit_name_1->text().isEmpty())
     {
         name1 = ui->lineEdit_name_1->text();

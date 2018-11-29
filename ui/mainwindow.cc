@@ -13,10 +13,10 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_battle(new Battle(this)),
       m_checkerBoardWidget(new CheckerBoardWidget(this)),
-      m_gameMenu(menuBar()->addMenu("Game")),
-      m_startGame(new QAction("Start game", this)),
-      m_stopGame(new QAction("Stop game", this)),
-      m_exitGame(new QAction("Exit", this)),
+      m_gameMenu(menuBar()->addMenu("游戏")),
+      m_startGame(new QAction("开始新游戏", this)),
+      m_stopGame(new QAction("结束游戏", this)),
+      m_exitGame(new QAction("退出", this)),
       m_newGameDialog(new NewGameDialog(this))
 {
     // 中心控件
@@ -87,11 +87,11 @@ void MainWindow::updateStatusBar()
     if (m_battle->isBattleRunning())
     {
         QString currentPlayerName = m_battle->getPlayer(m_battle->currentPlayerColor())->getName();
-        statusBar()->showMessage("请 " + currentPlayerName + " 下子");
+        statusBar()->showMessage("请 " + currentPlayerName + " 下子", 0);
     }
     else
     {
 
-        statusBar()->showMessage("开始一场新游戏");
+        statusBar()->showMessage("开始一场新游戏", 0);
     }
 }
