@@ -38,7 +38,7 @@ void BoardGrid::setStoneColor(GamePlay::PlayerColor role)
     m_playerColor = role;
     if (old != role && old != GamePlay::Unknown && role != GamePlay::Unknown)
     {
-        m_updateTimer->setInterval(400);
+        m_updateTimer->setInterval(300);
     }
     else
     {
