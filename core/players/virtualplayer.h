@@ -20,6 +20,7 @@ public:
     /// \param name 名字。
     /// \param parent 父控件。
     explicit VirtualPlayer(QString name, QObject *parent = nullptr);
+    virtual ~VirtualPlayer();
 
     /// \brief 获取名字。
     /// \return 玩家的名字。

@@ -5,3 +5,8 @@ VirtualPlayer::VirtualPlayer(QString name, QObject *parent)
 {
 
 }
+
+VirtualPlayer::~VirtualPlayer()
+{
+
+}
