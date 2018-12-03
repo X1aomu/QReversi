@@ -39,9 +39,9 @@ void Ai::slotNextMove(const GamePlay::CheckerBoard &game, GamePlay::PlayerColor 
     if (availPositions.empty())
         return;
 
-    std::random_device r;
-    std::default_random_engine randomEngine(r());
+    std::mt19937 rng;
+    rng.seed(time(nullptr));
     std::uniform_int_distribution<size_t> randomDist(0, availPositions.size() - 1);
 
-    emit sigMoved(availPositions.at(randomDist(randomEngine)));
+    emit sigMoved(availPositions.at(randomDist(rng)));
 }
