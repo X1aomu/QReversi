@@ -1,6 +1,8 @@
 #ifndef ROUND_H
 #define ROUND_H
 
+#include <memory>
+
 #include "core/gameplay.h"
 #include "core/players/virtualplayer.h"
 
@@ -38,7 +40,7 @@ public:
     /// \param playerColor 玩家颜色，
     ///        需为 #GamePlay::Black 或 #GamePlay::White 。
     /// \return 下子方 \p playerColor 对应的玩家。如果没有对战则为 nullptr。
-    VirtualPlayer *getPlayer(PlayerColor playerColor);
+    std::shared_ptr<VirtualPlayer> getPlayer(PlayerColor playerColor);
 
     /// \brief 开始对战。
     /// \param blackPlayerType 黑方的玩家类型。
@@ -87,10 +89,9 @@ signals:
 
 private:
     GamePlay m_gamePlay;
-    VirtualPlayer *m_playerBlack;
-    VirtualPlayer *m_playerWhile;
+    std::shared_ptr<VirtualPlayer> m_playerBlack;
+    std::shared_ptr<VirtualPlayer> m_playerWhile;
 
-    void cleanup();
     void gamePlayCheckerBoardChangedHandler(GamePlay::CheckerBoard currentBoard);
     void gamePlayPlayerChangedHandler(PlayerColor playerColor);
     void gamePlayGameOverHandler(PlayerColor winner);
