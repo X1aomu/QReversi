@@ -4,6 +4,7 @@
 #include "core/gameplay.h"
 
 #include <QPushButton>
+#include <QTimer>
 
 /// \brief 棋盘格子。
 ///
@@ -45,6 +46,7 @@ private:
     GamePlay::Position m_position;
     GamePlay::PlayerColor m_playerColor;
     bool m_hovered = false;
+    QTimer* m_updateTimer;
 };
 
 #endif // PIECEGIRD_H

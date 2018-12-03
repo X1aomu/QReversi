@@ -19,8 +19,9 @@ void Ai::slotNextMove(const GamePlay::CheckerBoard &game, GamePlay::PlayerColor 
     QTimer t;
     QEventLoop eventLoop;
     t.setSingleShot(true);
+    t.setTimerType(Qt::PreciseTimer);
     connect(&t, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-    t.start(500);
+    t.start(1000);
     eventLoop.exec();
 
     std::vector<GamePlay::Position> availPositions;

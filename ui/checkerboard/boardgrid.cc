@@ -3,11 +3,13 @@
 #include <QPainter>
 #include <QBrush>
 #include <QEvent>
+#include <QTimer>
 
 BoardGrid::BoardGrid(GamePlay::Position position, GamePlay::PlayerColor role, QWidget *parent)
     : QPushButton(parent),
       m_position(position),
-      m_playerColor(role)
+      m_playerColor(role),
+      m_updateTimer(new QTimer(this))
 {
     QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     sizePolicy.setHorizontalStretch(0);
@@ -19,6 +21,10 @@ BoardGrid::BoardGrid(GamePlay::Position position, GamePlay::PlayerColor role, QW
     setFocusPolicy(Qt::NoFocus);
     // 连接信号
     connect(this, &QPushButton::clicked, this, &BoardGrid::slotOnClicked);
+
+    m_updateTimer->setSingleShot(true);
+    m_updateTimer->setTimerType(Qt::PreciseTimer);
+    connect(m_updateTimer, &QTimer::timeout, this, [&](){ update(); });
 }
 
 BoardGrid::~BoardGrid()
@@ -28,8 +34,17 @@ BoardGrid::~BoardGrid()
 
 void BoardGrid::setStoneColor(GamePlay::PlayerColor role)
 {
+    auto old = m_playerColor;
     m_playerColor = role;
-    update();
+    if (old != role && old != GamePlay::Unknown && role != GamePlay::Unknown)
+    {
+        m_updateTimer->setInterval(400);
+    }
+    else
+    {
+        m_updateTimer->setInterval(0);
+    }
+    m_updateTimer->start();
 }
 
 void BoardGrid::slotOnClicked()
