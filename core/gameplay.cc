@@ -126,6 +126,8 @@ size_t GamePlay::tryMove(GamePlay::Position pos, PlayerColor playerColor, bool r
 
 bool GamePlay::playerCanMove(GamePlay::PlayerColor playerColor)
 {
+    if (!m_running)
+        return false;
     for (size_t row = 0; row != kBoardRows; ++row)
     {
         for (size_t col = 0; col != kBoardColumns; ++col)
