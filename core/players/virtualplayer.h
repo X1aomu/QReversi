@@ -25,6 +25,9 @@ public:
     /// \brief 获取名字。
     /// \return 玩家的名字。
     QString getName() { return m_name; }
+    /// \brief 设置名字。
+    /// \return 玩家的名字。
+    void setName(const QString &name) { m_name = name; }
 
 public slots:
     /// \brief 通知玩家下子。

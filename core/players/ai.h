@@ -31,7 +31,6 @@ public slots:
 
 private:
     GamePlay* m_game;
-    std::mutex m_processing;
 };
 
 inline void Ai::setGame(GamePlay *game)

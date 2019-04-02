@@ -5,6 +5,7 @@
 
 #include "core/gameplay.h"
 #include "core/players/virtualplayer.h"
+#include "core/players/ai.h"
 
 #include <QObject>
 
@@ -89,6 +90,8 @@ signals:
 
 private:
     GamePlay m_gamePlay;
+    std::shared_ptr<VirtualPlayer> m_blackAiPlayer;
+    std::shared_ptr<VirtualPlayer> m_whiteAiPlayer;
     std::shared_ptr<VirtualPlayer> m_playerBlack;
     std::shared_ptr<VirtualPlayer> m_playerWhile;
 

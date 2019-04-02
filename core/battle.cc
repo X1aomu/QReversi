@@ -6,6 +6,8 @@
 Battle::Battle(QObject *parent)
     : QObject(parent),
     m_gamePlay(this),
+    m_blackAiPlayer(std::make_shared<class Ai>("", this)),
+    m_whiteAiPlayer(std::make_shared<class Ai>("", this)),
     m_playerBlack(nullptr),
     m_playerWhile(nullptr)
 {
@@ -51,7 +53,8 @@ void Battle::startNewBattle(Battle::PlayerType blackPlayerType, Battle::PlayerTy
         m_playerBlack = std::make_shared<class Human>(blackPlayerName, this);
         break;
     case Ai:
-        m_playerBlack = std::make_shared<class Ai>(blackPlayerName, this);
+        m_playerBlack = m_blackAiPlayer;
+        m_playerBlack->setName(blackPlayerName);
         dynamic_cast<class Ai&>(*m_playerBlack).setGame(&m_gamePlay);
         break;
     }
@@ -60,7 +63,8 @@ void Battle::startNewBattle(Battle::PlayerType blackPlayerType, Battle::PlayerTy
         m_playerWhile = std::make_shared<class Human>(whitePlayerName, this);
         break;
     case Ai:
-        m_playerWhile = std::make_shared<class Ai>(whitePlayerName, this);
+        m_playerWhile = m_whiteAiPlayer;
+        m_playerWhile->setName(whitePlayerName);
         dynamic_cast<class Ai&>(*m_playerWhile).setGame(&m_gamePlay);
         break;
     }
