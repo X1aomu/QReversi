@@ -1,0 +1,14 @@
+language: cpp
+
+dist: xenial
+
+addons:
+  apt:
+    update: true
+
+before_install:
+  - sudo apt-get install -y qt5-default
+
+script:
+  - cmake .
+  - make -j2
