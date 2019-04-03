@@ -1,6 +1,8 @@
 #ifndef AI_H
 #define AI_H
 
+#include <mutex>
+
 #include "core/players/virtualplayer.h"
 #include "core/gameplay.h"
 
@@ -13,6 +15,7 @@ class Ai : public VirtualPlayer
 
 public:
     using VirtualPlayer::VirtualPlayer;
+    ~Ai() override;
 
     /// \brief 设置游戏
     void setGame(GamePlay* game);

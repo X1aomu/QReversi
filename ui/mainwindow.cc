@@ -57,7 +57,7 @@ void MainWindow::initSignalsAndSlots()
 
     // battle and mainwindow
     connect(m_battle, &Battle::sigBattleEnded, this, &MainWindow::showWinnerInfo);
-    connect(m_battle, &Battle::sigChanged, this, &MainWindow::updateStatusBar);
+    connect(m_battle, &Battle::sigChanged, this, &MainWindow::battleChangedHandler);
 }
 
 void MainWindow::startNewGame()
@@ -82,16 +82,19 @@ void MainWindow::showWinnerInfo(GamePlay::PlayerColor winner)
     mb->show();
 }
 
-void MainWindow::updateStatusBar()
+void MainWindow::battleChangedHandler()
 {
     if (m_battle->isBattleRunning())
     {
+        m_startGame->setEnabled(false);
+        m_stopGame->setEnabled(true);
         QString currentPlayerName = m_battle->getPlayer(m_battle->currentPlayerColor())->getName();
         statusBar()->showMessage("请 " + currentPlayerName + " 下子", 0);
     }
     else
     {
-
+        m_startGame->setEnabled(true);
+        m_stopGame->setEnabled(false);
         statusBar()->showMessage("开始一场新游戏", 0);
     }
 }

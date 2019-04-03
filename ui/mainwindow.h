@@ -36,7 +36,7 @@ private slots:
     /// 这个函数弹出一个对话框并显示出胜利方，其中包含一些必要的信息，比如胜者的昵称等。
     void showWinnerInfo(GamePlay::PlayerColor winner);
     /// \brief 更新状态栏。
-    void updateStatusBar();
+    void battleChangedHandler();
 
 private:
     // 游戏
