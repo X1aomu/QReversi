@@ -2,6 +2,7 @@
 
 #include "core/players/ai.h"
 #include "core/players/human.h"
+#include "core/players/networkplayer.h"
 
 Battle::Battle(QObject *parent)
   : QObject(parent),
@@ -69,6 +70,38 @@ void Battle::startNewBattle(Battle::PlayerType blackPlayerType, Battle::PlayerTy
     m_playerWhile = m_whiteAiPlayer;
     m_playerWhile->setName(whitePlayerName);
     dynamic_cast<class Ai &>(*m_playerWhile).setGame(&m_gamePlay);
+    break;
+  }
+
+  // 连接信号
+  connect(m_playerBlack.get(), &VirtualPlayer::sigMoved, &m_gamePlay, &GamePlay::slotMove);
+  connect(m_playerWhile.get(), &VirtualPlayer::sigMoved, &m_gamePlay, &GamePlay::slotMove);
+
+  m_gamePlay.slotStartNewGame();
+  emit sigBattleStarted();
+  emit sigChanged();
+}
+
+void Battle::startNewNetworkBattle(Battle::PlayerColor localPlayerColor,
+                                   std::shared_ptr<NetworkPlayer> networkPlayer,
+                                   QString localPlayerName)
+{
+  endBattle();
+
+  // 这个函数由新游戏对话框调用，对话框没有 gameplay 的信息，因此须在此设置 gameplay
+  networkPlayer->setGame(&m_gamePlay);
+
+  switch (localPlayerColor)
+  {
+  case PlayerColor::Black:
+    m_playerBlack = std::make_shared<class Human>(localPlayerName, this);
+    m_playerWhile = networkPlayer;
+    break;
+  case PlayerColor::White:
+    m_playerBlack = networkPlayer;
+    m_playerWhile = std::make_shared<class Human>(localPlayerName, this);
+    break;
+  default:
     break;
   }
 

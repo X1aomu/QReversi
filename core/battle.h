@@ -5,8 +5,10 @@
 
 #include "core/gameplay.h"
 #include "core/players/ai.h"
+#include "core/players/networkplayer.h"
 #include "core/players/virtualplayer.h"
 
+#include <QHostAddress>
 #include <QObject>
 
 /// \brief 对战类，代表一局游戏。
@@ -35,9 +37,11 @@ public:
   /// \brief 是否正在对战中。
   /// \return 如果正在对战则为 true。
   bool isBattleRunning();
+
   /// \brief 当前下子方。
   /// \return 当前下子方。
   PlayerColor currentPlayerColor();
+
   /// \brief 获取对战中的玩家。
   /// \param playerColor 玩家颜色，
   ///        需为 #GamePlay::Black 或 #GamePlay::White 。
@@ -52,6 +56,12 @@ public:
   void startNewBattle(PlayerType blackPlayerType, PlayerType whitePlayerType,
                       QString blackPlayerName = "Black Player",
                       QString whitePlayerName = "White Player");
+
+  /// TODO
+  void startNewNetworkBattle(PlayerColor localPlayerColor,
+                             std::shared_ptr<NetworkPlayer> networkPlayer,
+                             QString localPlayerName = "本地玩家");
+
   /// \brief 结束对战。
   ///
   /// 这个函数用于中途结束对战，不会发出 sigBattleEnded() 信号。

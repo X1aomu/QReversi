@@ -19,6 +19,8 @@ void GamePlay::slotStartNewGame()
   reset();
   m_running = true;
   m_currentPlayer = Black;
+  // 设置为一个不可下子的位置，因为如果远程玩家是黑方，这个变量会在开局时被读取并发送给远程玩家
+  m_lastMove = {0, 0};
   emit sigCheckerBoardChanged(m_board);
   emit sigPlayerChanged(m_currentPlayer);
 }
@@ -29,6 +31,8 @@ void GamePlay::slotMove(GamePlay::Position pos)
   if (m_currentPlayer == Unknown) return;
   if (tryMove(pos, m_currentPlayer, true) > 0)
   {
+    // 下子成功，记录下子位置
+    m_lastMove = pos;
     emit sigCheckerBoardChanged(m_board);
     // 判断下子方有没有改变
     PlayerColor nextPlayer = (m_currentPlayer == Black) ? White : Black;

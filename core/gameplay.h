@@ -46,15 +46,22 @@ public:
   /// \param pos 下子位置。
   /// \return 是否可以下子。
   bool isMoveable(Position pos);
+
   /// \brief 获取当前棋盘。
   /// \return 当前棋盘。
   CheckerBoard getCheckerBoard();
+
   /// \brief 查询游戏是否正在进行中。
   /// \return 为 true 则正在进行中，为 false 则反之。
   bool isRunning();
+
   /// \brief 获取当前下子方。
   /// \return 当前下子方。
   PlayerColor getCurrentPlayerColor();
+
+  /// \brief 获取最后一次的下子位置。
+  /// \return 最后一次的下子位置。
+  Position getLastMovePosition() { return m_lastMove; }
 
 public slots:
   /// \brief 开始一局新游戏。
@@ -84,10 +91,6 @@ signals:
   void sigGameOver(PlayerColor playerColor);
 
 private:
-  CheckerBoard m_board;        ///< 目前棋盘。
-  bool m_running;              ///< 游戏是否正在进行中。
-  PlayerColor m_currentPlayer; ///< 目前下子玩家。
-
   /// \brief 在一个位置尝试下子。
   ///
   /// 这个函数可以用来测试一个位置能否下子，它将返回假设在给定位置下子后被翻转的
@@ -98,12 +101,19 @@ private:
   /// \param realMove 为 false 不实际下子，为 true 则实际下子。
   /// \return 下子方在指定位置下子后翻转对方棋子的数量。
   size_t tryMove(Position pos, PlayerColor playerColor, bool realMove);
+
   /// \brief 判断一方是否能下子。
   /// \param playerColor 想要下子的一方。
   /// \return 为 true 则指定的一方可以下子，为 false 则反之。
   bool playerCanMove(PlayerColor playerColor);
 
   PlayerColor getWinner();
+
+private:
+  CheckerBoard m_board;        ///< 目前棋盘。
+  bool m_running;              ///< 游戏是否正在进行中。
+  PlayerColor m_currentPlayer; ///< 目前下子玩家。
+  Position m_lastMove;         ///< 最后一次的下子位置
 
   friend class Ai;
 };

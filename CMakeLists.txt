@@ -7,6 +7,7 @@ endif()
 project(QReversi)
 
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -23,14 +24,18 @@ set(SOURCES
     core/players/ai.cc
     core/players/human.cc
     core/players/virtualplayer.cc
+    core/players/networkplayer.cc
     ui/mainwindow.cc
     ui/newgamedialog.cc
+    ui/newnetworkgamedialog.cc
     ui/checkerboard/boardlayout.cc
     ui/checkerboard/checkerboardwidget.cc
     ui/checkerboard/boardgrid.cc
     ui/newgamedialog.ui
+    ui/newnetworkgamedialog.ui
     resources.qrc
 )
 
 add_executable(qreversi ${SOURCES})
 target_link_libraries(qreversi Qt5::Widgets)
+target_link_libraries(qreversi Qt5::Network)

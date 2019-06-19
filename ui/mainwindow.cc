@@ -15,9 +15,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_checkerBoardWidget(new CheckerBoardWidget(this)),
     m_gameMenu(menuBar()->addMenu("游戏")),
     m_startGame(new QAction("开始新游戏", this)),
+    m_startNetworkGame(new QAction("开始网络游戏", this)),
     m_stopGame(new QAction("结束游戏", this)),
     m_exitGame(new QAction("退出", this)),
-    m_newGameDialog(new NewGameDialog(this))
+    m_newGameDialog(new NewGameDialog(this)),
+    m_newNetworkGameDialog(new NewNetworkGameDialog(this))
 {
   // 中心控件
   setCentralWidget(m_checkerBoardWidget);
@@ -26,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
   initSignalsAndSlots();
 
   m_newGameDialog->setBattle(m_battle);
+  m_newNetworkGameDialog->setBattle(m_battle);
 
   m_battle->endBattle(); // 首次重置
 }
@@ -38,6 +41,7 @@ void MainWindow::initMenuBar()
 {
   // 游戏菜单
   m_gameMenu->addAction(m_startGame);
+  m_gameMenu->addAction(m_startNetworkGame);
   m_gameMenu->addAction(m_stopGame);
   m_gameMenu->addSeparator();
   m_gameMenu->addAction(m_exitGame);
@@ -48,6 +52,7 @@ void MainWindow::initSignalsAndSlots()
   // menu actions
   connect(m_exitGame, &QAction::triggered, this, []() { QApplication::quit(); });
   connect(m_startGame, &QAction::triggered, this, &MainWindow::startNewGame);
+  connect(m_startNetworkGame, &QAction::triggered, this, &MainWindow::startNewNetworkGame);
   connect(m_stopGame, &QAction::triggered, this, &MainWindow::stopGame);
 
   // battle and checkerboardwidget
@@ -63,6 +68,11 @@ void MainWindow::initSignalsAndSlots()
 void MainWindow::startNewGame()
 {
   m_newGameDialog->show();
+}
+
+void MainWindow::startNewNetworkGame()
+{
+  m_newNetworkGameDialog->show();
 }
 
 void MainWindow::stopGame()
