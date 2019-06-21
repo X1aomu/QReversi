@@ -4,12 +4,12 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    a.setWindowIcon(QIcon(":/icons/app.png"));
+  QApplication a(argc, argv);
+  a.setWindowIcon(QIcon(":/icons/app.png"));
 
-    MainWindow w;
-    w.show();
-    w.setFixedSize(w.sizeHint());
+  MainWindow w;
+  w.show();
+  w.setFixedSize(w.sizeHint());
 
-    return a.exec();
+  return a.exec();
 }

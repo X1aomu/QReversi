@@ -2,13 +2,11 @@
 
 #include <QGridLayout>
 
-BoardLayout::BoardLayout(QWidget *parent)
-    : QGridLayout(parent)
+BoardLayout::BoardLayout(QWidget *parent) : QGridLayout(parent)
 {
-    setSpacing(0);
+  setSpacing(0);
 }
 
 BoardLayout::~BoardLayout()
 {
-
 }

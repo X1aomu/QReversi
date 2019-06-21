@@ -1,0 +1,21 @@
+---
+Language:        Cpp
+BasedOnStyle:    LLVM
+ColumnLimit:     100
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth: 2
+#IndentWidth:     4
+#ContinuationIndentWidth: 8
+#AccessModifierOffset: -4
+BreakBeforeBraces: Allman
+#DerivePointerAlignment: false
+#PointerAlignment: Right
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: false
+---
+Language:        Java
+BasedOnStyle:    Google
+...

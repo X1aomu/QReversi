@@ -5,29 +5,30 @@
 
 #include "core/battle.h"
 
-namespace Ui {
+namespace Ui
+{
 class NewGameDialog;
 }
 
 /// \brief 新建游戏对话框。
 class NewGameDialog : public QDialog
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit NewGameDialog(QWidget *parent = nullptr);
-    ~NewGameDialog();
+  explicit NewGameDialog(QWidget *parent = nullptr);
+  ~NewGameDialog();
 
-    /// \brief 设置对战。
-    void setBattle(Battle* battle) { m_battle = battle; }
+  /// \brief 设置对战。
+  void setBattle(Battle *battle) { m_battle = battle; }
 
 private slots:
-    void on_buttonBox_accepted();
+  void on_buttonBox_accepted();
 
 private:
-    Ui::NewGameDialog *ui;
+  Ui::NewGameDialog *ui;
 
-    Battle* m_battle;
+  Battle *m_battle;
 };
 
 #endif // NEWGAMEDIALOG_H
