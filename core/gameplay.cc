@@ -49,6 +49,8 @@ void GamePlay::slotMove(GamePlay::Position pos)
     }
     if (!playerCanMove(nextPlayer) && !playerCanMove(m_currentPlayer))
     {
+      // 这里游戏已经结束了，但是仍要发出让下一个玩家下子的信号，不然网络上的对方将收不到最后一步下子的消息
+      emit sigPlayerChanged(nextPlayer);
       // 没有玩家能够继续下子了，游戏结束，发送信号。
       PlayerColor winner = getWinner();
       emit sigGameOver(winner);
