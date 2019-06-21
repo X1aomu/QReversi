@@ -4,6 +4,7 @@
 #include "core/gameplay.h"
 #include "core/players/virtualplayer.h"
 
+#include <QNetworkDatagram>
 #include <QObject>
 #include <QUdpSocket>
 
