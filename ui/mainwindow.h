@@ -6,6 +6,7 @@
 #include "core/players/virtualplayer.h"
 #include "ui/checkerboard/checkerboardwidget.h"
 #include "ui/newgamedialog.h"
+#include "ui/newnetworkgamedialog.h"
 
 #include <QMainWindow>
 
@@ -27,14 +28,20 @@ private slots:
   ///
   /// 这个函数将弹出一个对话框，让用户选择游戏设置以开始新游戏。
   void startNewGame();
+
+  /// TODO
+  void startNewNetworkGame();
+
   /// \brief 以交互方式结束当前游戏。
   ///
   /// 这个函数将弹出一个对话框，询问用户是否结束游戏。
   void stopGame();
+
   /// \brief 游戏结束后显示胜方信息。
   ///
   /// 这个函数弹出一个对话框并显示出胜利方，其中包含一些必要的信息，比如胜者的昵称等。
   void showWinnerInfo(GamePlay::PlayerColor winner);
+
   /// \brief 更新状态栏。
   void battleChangedHandler();
 
@@ -46,10 +53,12 @@ private:
   // 菜单栏组件
   QMenu *m_gameMenu;
   QAction *m_startGame;
+  QAction *m_startNetworkGame;
   QAction *m_stopGame;
   QAction *m_exitGame;
 
   NewGameDialog *m_newGameDialog;
+  NewNetworkGameDialog *m_newNetworkGameDialog;
 
   void initMenuBar();
   void initSignalsAndSlots();
